@@ -1,1 +1,37 @@
 ###
+
+GET http://localhost:3000/usuarios
+
+###
+
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+    "senha": "12345",
+    "email": "marcosa@gmail.com"
+}
+
+###
+
+PUT http://localhost:3000/usuarios/3
+Content-Type: application/json
+
+{
+    "email": "marquinhoLindo@gmail.com",
+    "senha": "12345"
+}
+
+###
+
+DELETE http://localhost:3000/usuarios/2
+
+###
+
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+    "senha": "12345",
+    "email": "marquinhoLindo@gmail.com"
+}

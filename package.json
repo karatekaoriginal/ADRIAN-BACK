@@ -13,13 +13,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/karatekaoriginal/ADRIAN/issues"
   },
   "homepage": "https://github.com/karatekaoriginal/ADRIAN#readme",
   "dependencies": {
     "@fastify/cors": "^11.2.0",
+    "fastify": "^5.8.5",
     "pg": "^8.21.0"
   }
 }
