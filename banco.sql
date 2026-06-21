@@ -14,7 +14,8 @@ CREATE TABLE if not exists Arquivo (
     Nome VARCHAR (255) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ultima_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    LingProg LINGUAGEM NOT NULL
+    LingProg LINGUAGEM NOT NULL,
+    codigo text
 );
 
 CREATE TABLE if not exists Arquivo_Usuario(
