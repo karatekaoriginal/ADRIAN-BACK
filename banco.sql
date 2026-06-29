@@ -4,8 +4,8 @@ CREATE TYPE LINGUAGEM AS ENUM
 
 CREATE TABLE if not exists Usuario (
     id_usuario SERIAL PRIMARY KEY,
-    senha  VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
+    senha  VARCHAR(128) NOT NULL,
     ativo BOOLEAN DEFAULT true
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE if not exists Arquivo (
     Nome VARCHAR (255) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ultima_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    LingProg LINGUAGEM NOT NULL,
+    LingProg LINGUAGEM,
     codigo text
 );
 

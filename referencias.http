@@ -1,37 +1,74 @@
 ###
-
-GET http://localhost:3000/usuarios
-
-###
-
-POST http://localhost:3000/usuarios
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "senha": "12345",
+    "senha": "Teste1",
     "email": "marcosa@gmail.com"
 }
 
 ###
-
-PUT http://localhost:3000/usuarios/3
-Content-Type: application/json
-
-{
-    "email": "marquinhoLindo@gmail.com",
-    "senha": "12345"
-}
+GET http://localhost:3000/usuarios
 
 ###
-
-DELETE http://localhost:3000/usuarios/2
-
-###
-
 POST http://localhost:3000/usuarios
 Content-Type: application/json
 
 {
-    "senha": "12345",
-    "email": "marquinhoLindo@gmail.com"
+    "senha": "Teste1",
+    "email": "marcosa@gmail.com"
 }
+
+###
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{
+    "email": "marLonbrando@gmail.com",
+    "senha": "12345"
+}
+
+###
+DELETE http://localhost:3000/usuarios/1
+
+###
+GET http://localhost:3000/arquivos
+
+###
+
+POST http://localhost:3000/arquivos
+Content-Type: application/json
+
+{
+    "Nome": "Teste",
+    "LingProg": "",
+}
+
+###
+
+PUT http://localhost:3000/arquivos/3
+Content-Type: application/json
+
+{
+    "Nome": "Teste2",
+    "LingProg": "",
+}
+
+
+###
+
+DELETE http://localhost:3000/arquivos/1
+
+###
+
+POST http://localhost:3000/arquivos
+Content-Type: application/json
+
+{
+{
+    "Nome": "12345",
+    "LingProg": "",
+}
+
+}
+
