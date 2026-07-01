@@ -35,7 +35,6 @@ DELETE http://localhost:3000/usuarios/1
 GET http://localhost:3000/usuarios/1/arquivos
 
 ###
-
 POST http://localhost:3000/arquivos
 Content-Type: application/json
 
@@ -45,7 +44,6 @@ Content-Type: application/json
 }
 
 ###
-
 PUT http://localhost:3000/arquivos/1
 Content-Type: application/json
 
@@ -56,5 +54,4 @@ Content-Type: application/json
 
 
 ###
-
 DELETE http://localhost:3000/arquivos/1
