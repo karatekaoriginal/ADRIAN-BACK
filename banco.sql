@@ -38,3 +38,9 @@ CREATE TRIGGER trg_atualizar_tabela
 BEFORE UPDATE ON Arquivo
 FOR EACH ROW
 EXECUTE PROCEDURE atualiza_timestamp();
+
+
+SELECT a.id_arquivo, a.Nome, a.LingProg, a.codigo
+FROM Arquivo a
+JOIN Arquivo_Usuario au ON a.id_arquivo = au.id_arquivo
+WHERE au.id_usuario = 1;

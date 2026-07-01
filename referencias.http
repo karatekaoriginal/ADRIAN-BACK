@@ -32,7 +32,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/usuarios/1
 
 ###
-GET http://localhost:3000/arquivos
+GET http://localhost:3000/usuarios/1/arquivos
 
 ###
 
@@ -41,34 +41,20 @@ Content-Type: application/json
 
 {
     "Nome": "Teste",
-    "LingProg": "",
+    "LingProg": "Python"
 }
 
 ###
 
-PUT http://localhost:3000/arquivos/3
+PUT http://localhost:3000/arquivos/1
 Content-Type: application/json
 
 {
     "Nome": "Teste2",
-    "LingProg": "",
+    "LingProg": "JavaScript"
 }
 
 
 ###
 
 DELETE http://localhost:3000/arquivos/1
-
-###
-
-POST http://localhost:3000/arquivos
-Content-Type: application/json
-
-{
-{
-    "Nome": "12345",
-    "LingProg": "",
-}
-
-}
-

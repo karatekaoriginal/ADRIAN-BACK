@@ -20,14 +20,14 @@ servidor.register(cors, {
 servidor.post('/login', async (request, reply) => {
     const body = request.body;
     if (!body || !body.email || !body.senha) {
-        reply.status(400).send({error: "E-mail e senha obrigatórios!"})
+        return reply.status(400).send({error: "E-mail e senha obrigatórios!"})
     }
     const resultado = await sql.query('select * from Usuario where email = $1 AND senha = $2', [body.email, body.senha])    
 
     if (resultado.rows.length === 0) {
-        reply.status(401).send({message: "Usuário ou senha inválidos!", login: false})
+        return reply.status(401).send({message: "Usuário ou senha inválidos!", login: false})
     } else if (resultado.rows.length === 1) {
-        reply.status(200).send({message: "Usuario logado", login: true})
+        return reply.status(200).send({message: "Usuario logado", login: true})
     }
 
 })
@@ -38,7 +38,7 @@ servidor.get('/usuarios', async () => {
 })
 
 servidor.post('/usuarios', async (request, reply) => {
-    const body = request.body;
+    const body = await request.body;
 
     if (!body || !body.senha || !body.email) {
         return reply.status(400).send({
@@ -72,20 +72,25 @@ servidor.put('/usuarios/:id', async (request, reply) => {
     }
 
     const resultado = await sql.query('UPDATE Usuario SET senha = $1, email = $2 WHERE id_usuario = $3', [body.senha, body.email, id])      
-    reply.status(201).send({message: `Usuario: ${body.email} alterado!`})          
+    return reply.status(200).send({message: `Usuario: ${body.email} alterado!`})          
 })
 
 servidor.delete('/usuarios/:id', async (request, reply) => {
     const id = request.params.id
     const resultado = await sql.query('DELETE FROM Usuario where id_usuario = $1', [id]) 
     console.log(resultado);    
-    reply.status(200).send({message:'Usuário Deletado!'})
+    return reply.status(200).send({message:'Usuário Deletado!'})
 })
 
 
-servidor.get('/arquivos', async () => {
-    const resultado = await sql.query('select * from Arquivo')
-    return resultado.rows
+servidor.get('/usuarios/:id/arquivos', async (request, reply) => {
+    const id = request.params.id
+    const resultado = await sql.query('SELECT a.id_arquivo, a.Nome, a.LingProg, a.codigo, a.criado_em, a.ultima_atualizacao FROM Arquivo a JOIN Arquivo_Usuario au ON a.id_arquivo = au.id_arquivo WHERE au.id_usuario = $1', [id])
+    if (resultado.rows.length === 0) {
+        return reply.status(404).send({message: "Esse usuário não possui nenhum arquivo"})
+    } else if (resultado.rows.length >= 1) {
+        return resultado.rows;
+    }
 })
 
 servidor.post('/arquivos', async (request, reply) => {
@@ -97,8 +102,8 @@ servidor.post('/arquivos', async (request, reply) => {
         })
     }
 
-    const resultado = await sql.query('INSERT INTO arquivos (Nome, LingProg) VALUES ($1, $2)', [body.nome, body.lingprog])          
-    reply.status(201).send({message: 'Arquivo Criado!'})
+    const resultado = await sql.query('INSERT INTO arquivo (Nome, LingProg) VALUES ($1, $2)', [body.nome, body.lingprog])          
+    return reply.status(201).send({message: 'Arquivo Criado!'})
 })
 
 servidor.put('/arquivos/:id', async (request, reply) => {
@@ -118,19 +123,19 @@ servidor.put('/arquivos/:id', async (request, reply) => {
     const arquivo = await sql.query('SELECT * from Arquivo where id_arquivo = $1', [id])  
     if (arquivo.rows.length === 0) {
         return reply.status(400).send({
-            message: "Usuário não existe!"
+            message: "Arquivo não existe!"
         })
     }
 
     const resultado = await sql.query('UPDATE Arquivo SET Nome = $1, LingProg = $2 WHERE id_arquivo = $3', [body.nome, body.lingprog, id])      
-    reply.status(201).send({message: `Arquivo: ${body.email} alterado!`})          
+    return reply.status(200).send({message: `Arquivo: ${body.nome} alterado!`})          
 })
 
 servidor.delete('/arquivos/:id', async (request, reply) => {
     const id = request.params.id
     const resultado = await sql.query('DELETE FROM Arquivo where id_arquivo = $1', [id]) 
     console.log(resultado);    
-    reply.status(200).send({message:'Arquivo Deletado!'})
+    return reply.status(200).send({message:'Arquivo Deletado!'})
 })
 
 servidor.listen({   
